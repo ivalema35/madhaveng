@@ -63,43 +63,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Form Validation
-const contactForm = document.querySelector('.contact-form form');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const message = document.getElementById('message').value.trim();
-
-        // Basic validation
-        if (!name || !email || !phone || !message) {
-            alert('Please fill in all fields');
-            return;
-        }
-
-        // Email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert('Please enter a valid email address');
-            return;
-        }
-
-        // Phone validation (basic)
-        const phoneRegex = /^[0-9]{10,}$/;
-        if (!phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''))) {
-            alert('Please enter a valid phone number (at least 10 digits)');
-            return;
-        }
-
-        // Success message
-        alert('Thank you for your message! We will get back to you soon.');
-        contactForm.reset();
-    });
-}
 
 // Intersection Observer for Animations
 const observerOptions = {
