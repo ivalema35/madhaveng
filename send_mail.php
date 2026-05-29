@@ -41,7 +41,7 @@ try {
     $mail->Port       = 465;
 
     $mail->setFrom('ivaiagent05@gmail.com', 'Madhav Engineering Works');
-    $mail->addAddress('rbmadhav17@yahoo.com', 'Madhav Engineering Works');
+    $mail->addAddress('ivaiagent05@gmail.com', 'Madhav Engineering Works');
     $mail->addReplyTo($email, $name);
 
     $mail->isHTML(true);
