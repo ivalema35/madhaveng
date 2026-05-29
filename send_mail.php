@@ -33,14 +33,14 @@ $mail = new PHPMailer(true);
 
 try {
     $mail->isSMTP();
-    $mail->Host       = 'smtp.gmail.com';
+    $mail->Host       = 'mail.madhavengineeringworks.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'ivaiagent05@gmail.com';
-    $mail->Password   = 'xvsoulhaexcmsfrp';
+    $mail->Username   = 'info@madhavengineeringworks.com';
+    $mail->Password   = 'bed752K@4';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port       = 465;
 
-    $mail->setFrom('ivaiagent05@gmail.com', 'Madhav Engineering Works');
+    $mail->setFrom('info@madhavengineeringworks.com', 'Madhav Engineering Works');
     $mail->addAddress('ivaiagent05@gmail.com', 'Madhav Engineering Works');
     $mail->addReplyTo($email, $name);
 
