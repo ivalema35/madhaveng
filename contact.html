@@ -62,7 +62,8 @@
                 <!-- Contact Form -->
                 <div class="contact-form">
                     <h2 style="color: var(--primary-blue); margin-bottom: 1.5rem;">Send Us a Message</h2>
-                    <form>
+                    <div id="form-msg" style="display:none; padding:12px; border-radius:8px; margin-bottom:1rem; font-weight:600;"></div>
+                    <form id="inquiry-form">
                         <div class="form-group">
                             <label for="name">Full Name *</label>
                             <input type="text" id="name" name="name" required placeholder="Enter your name">
@@ -84,8 +85,43 @@
                                 placeholder="Tell us about your requirements..."></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Inquiry</button>
+                        <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%;">Submit Inquiry</button>
                     </form>
+                    <script>
+                        document.getElementById('inquiry-form').addEventListener('submit', function(e) {
+                            e.preventDefault();
+                            var btn = document.getElementById('submit-btn');
+                            var msg = document.getElementById('form-msg');
+                            btn.disabled = true;
+                            btn.textContent = 'Sending...';
+                            var formData = new FormData(this);
+                            fetch('send_mail.php', { method: 'POST', body: formData })
+                                .then(function(r) { return r.json(); })
+                                .then(function(data) {
+                                    msg.style.display = 'block';
+                                    if (data.success) {
+                                        msg.style.background = '#e8f5e9';
+                                        msg.style.color = '#2e7d32';
+                                        msg.textContent = 'Thank you! Your inquiry has been sent successfully.';
+                                        document.getElementById('inquiry-form').reset();
+                                    } else {
+                                        msg.style.background = '#ffebee';
+                                        msg.style.color = '#c62828';
+                                        msg.textContent = data.message || 'Something went wrong. Please try again.';
+                                    }
+                                    btn.disabled = false;
+                                    btn.textContent = 'Submit Inquiry';
+                                })
+                                .catch(function() {
+                                    msg.style.display = 'block';
+                                    msg.style.background = '#ffebee';
+                                    msg.style.color = '#c62828';
+                                    msg.textContent = 'Network error. Please try again.';
+                                    btn.disabled = false;
+                                    btn.textContent = 'Submit Inquiry';
+                                });
+                        });
+                    </script>
                 </div>
 
                 <!-- Contact Info -->
